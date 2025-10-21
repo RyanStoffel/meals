@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // package for persistent storage
 
+
 class RatingsNotifier extends StateNotifier<Map<String, int>> {
   RatingsNotifier() : super({}) {
     _loadRatings(); // Load saved ratings when app starts
