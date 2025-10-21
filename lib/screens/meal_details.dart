@@ -4,6 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals/models/meal.dart';
 import 'package:meals/providers/favorites_provider.dart';
 
+import 'package:meals/providers/ratings_provider.dart';
+import 'package:meals/widgets/star_rating.dart';
+
 class MealDetailsScreen extends ConsumerWidget {
   const MealDetailsScreen({
     super.key,
@@ -15,6 +18,8 @@ class MealDetailsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final favoriteMeals = ref.watch(favoriteMealsProvider);
+    final ratings = ref.watch(ratingsProvider); // Provider added ratings state, using ratings_provider
+    final currentRating = ratings[meal.id] ?? 0; // gets the meal's rating
 
     final isFavorite = favoriteMeals.contains(meal);
 
@@ -59,6 +64,22 @@ class MealDetailsScreen extends ConsumerWidget {
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
+              ),
+              const SizedBox(height: 14),
+              Text(
+                'Rating',
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              const SizedBox(height: 8),
+              StarRating( // 5 star rating widget, star_rating.dart
+                rating: currentRating, // Shows current rating
+                onRatingChanged: (rating) {
+                  // When user taps a star it saves the new rating
+                  ref.read(ratingsProvider.notifier).setRating(meal.id, rating);
+                },
               ),
               const SizedBox(height: 14),
               Text(
