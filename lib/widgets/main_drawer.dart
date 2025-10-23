@@ -61,6 +61,23 @@ class MainDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(
+              Icons.calendar_today,
+              size: 26,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+            title: Text(
+              'Meal Planner',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 24,
+                  ),
+            ),
+            onTap: () {
+              onSelectScreen('planner');
+            },
+          ),
+          ListTile(
+            leading: Icon(
               Icons.search,
               size: 26,
               color: Theme.of(context).colorScheme.onBackground,
