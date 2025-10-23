@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals/screens/categories.dart';
 import 'package:meals/screens/filters.dart';
 import 'package:meals/screens/meals.dart';
+import 'package:meals/screens/search.dart';
 import 'package:meals/widgets/main_drawer.dart';
 import 'package:meals/providers/favorites_provider.dart';
 import 'package:meals/providers/filters_provider.dart';
@@ -41,6 +42,12 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
           builder: (ctx) => const FiltersScreen(),
         ),
       );
+    } else if (identifier == 'search') {
+      await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (ctx) => const SearchScreen(),
+        ),
+      );
     }
   }
 
@@ -64,6 +71,19 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(activePageTitle),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (ctx) => const SearchScreen(),
+                ),
+              );
+            },
+            tooltip: 'Search Meals',
+          ),
+        ],
       ),
       drawer: MainDrawer(
         onSelectScreen: _setScreen,
