@@ -84,13 +84,19 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(activePageTitle),
+        title: Text(
+          activePageTitle,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
         actions: [
           // Meal Planner with badge
           Stack(
             children: [
               IconButton(
-                icon: const Icon(Icons.calendar_today),
+                icon: const Icon(Icons.calendar_today_rounded),
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -128,7 +134,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
             ],
           ),
           IconButton(
-            icon: const Icon(Icons.search),
+            icon: const Icon(Icons.search_rounded),
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
