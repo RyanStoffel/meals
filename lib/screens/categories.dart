@@ -62,12 +62,12 @@ class _CategoriesScreenState extends State<CategoriesScreen>
     return AnimatedBuilder(
       animation: _animationController,
       child: GridView(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 3 / 2,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
         ),
         children: [
           // availableCategories.map((category) => CategoryGridItem(category: category)).toList()

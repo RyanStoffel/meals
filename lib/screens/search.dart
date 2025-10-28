@@ -71,29 +71,53 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _searchController,
-              style: const TextStyle(color: Colors.white), // Add this line!
-              decoration: InputDecoration(
-                hintText: 'Search by meal name or ingredient...',
-                hintStyle: TextStyle(
-                  color: Colors.white.withOpacity(0.6), // Optional: style the hint text too
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: TextField(
+                controller: _searchController,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontSize: 16,
                 ),
-                prefixIcon: const Icon(Icons.search, color: Colors.white), // Optional: white icon
-                suffixIcon: _searchQuery.isNotEmpty
-                    ? IconButton(
-                        icon: const Icon(Icons.clear, color: Colors.white), // Optional: white clear icon
-                        onPressed: () {
-                          _searchController.clear();
-                        },
-                      )
-                    : null,
-                filled: true,
-                fillColor: Theme.of(context).colorScheme.surface,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide.none,
+                decoration: InputDecoration(
+                  hintText: 'Search by meal name or ingredient...',
+                  hintStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                  ),
+                  prefixIcon: Icon(
+                    Icons.search_rounded,
+                    color: Theme.of(context).colorScheme.primary,
+                    size: 24,
+                  ),
+                  suffixIcon: _searchQuery.isNotEmpty
+                      ? IconButton(
+                          icon: Icon(
+                            Icons.clear_rounded,
+                            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                          ),
+                          onPressed: () {
+                            _searchController.clear();
+                          },
+                        )
+                      : null,
+                  filled: true,
+                  fillColor: Colors.transparent,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide.none,
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 ),
               ),
             ),
@@ -148,23 +172,31 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.search,
-              size: 80,
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+            Container(
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.search_rounded,
+                size: 80,
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
-            const SizedBox(height: 16,),
+            const SizedBox(height: 24),
             Text(
               'Start typing to search meals',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 color: Theme.of(context).colorScheme.onBackground,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 8,),
+            const SizedBox(height: 12),
             Text(
               'Search by meal name or ingredient',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.6),
               ),
             )
           ],
